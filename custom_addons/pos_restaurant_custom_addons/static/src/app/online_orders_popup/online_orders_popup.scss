@@ -1,0 +1,23 @@
+.online-orders-popup {
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    background-color: #ffffff;
+    overflow: hidden;
+
+    .bg-danger-subtle {
+        background-color: #fff1f0 !important;
+    }
+
+    .border-danger-subtle {
+        border-color: #ffccc7 !important;
+    }
+
+    .card {
+        border-color: #e9ecef !important;
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+
+        &:hover {
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+        }
+    }
+}

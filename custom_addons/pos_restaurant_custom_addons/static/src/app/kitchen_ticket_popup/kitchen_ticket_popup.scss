@@ -1,0 +1,31 @@
+.kitchen-ticket-popup {
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    background-color: #ffffff;
+    overflow: hidden;
+
+    .kitchen-ticket-receipt {
+        border-style: solid;
+        box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+    }
+}
+
+/* Format Khusus saat mencetak (Window.print) */
+@media print {
+    body * {
+        visibility: hidden !important;
+    }
+    .kitchen-ticket-receipt, .kitchen-ticket-receipt * {
+        visibility: visible !important;
+    }
+    .kitchen-ticket-receipt {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 78mm;
+        margin: 0;
+        padding: 5mm !important;
+        border: none !important;
+        box-shadow: none !important;
+    }
+}

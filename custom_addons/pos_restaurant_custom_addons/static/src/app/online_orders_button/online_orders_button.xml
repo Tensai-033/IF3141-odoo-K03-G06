@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_restaurant_custom_addons.OnlineOrdersButton">
+        <div class="oe_status cursor-pointer d-flex align-items-center px-3 py-1 me-2 position-relative btn btn-outline-primary border rounded-pill my-auto"
+             t-on-click="onClick"
+             title="Pesanan Masuk dari Sheepo, Grob, Gejok"
+             style="height: 38px;">
+            <i class="fa fa-motorcycle fs-5 me-2 text-primary" role="img" aria-label="Pesanan Online"></i>
+            <span class="d-none d-md-inline fw-semibold text-dark">Pesanan Delivery</span>
+            <span t-if="store.pendingCount > 0" 
+                  class="badge bg-danger rounded-pill ms-2 text-white px-2 py-1 fw-bold"
+                  style="animation: pulse 1.5s infinite;">
+                <t t-esc="store.pendingCount"/>
+            </span>
+        </div>
+    </t>
+
+</templates>

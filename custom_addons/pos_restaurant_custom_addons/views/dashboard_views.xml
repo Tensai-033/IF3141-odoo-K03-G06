@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Client Action Dashboard Manajemen & Rekonsiliasi Restoran -->
+    <record id="action_restaurant_management_dashboard" model="ir.actions.client">
+        <field name="name">Dashboard Manajemen &amp; Rekonsiliasi</field>
+        <field name="tag">restaurant_management_dashboard</field>
+        <field name="target">current</field>
+    </record>
+</odoo>

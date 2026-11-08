@@ -1,0 +1,27 @@
+.restaurant-management-dashboard {
+    background-color: #f8fafc !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+    .card {
+        border-color: #e2e8f0 !important;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    table {
+        th {
+            font-weight: 600;
+            color: #334155;
+            background-color: #f1f5f9;
+        }
+
+        td {
+            color: #1e293b;
+        }
+    }
+}
+
+@media print {
+    .btn-group, .btn, .session-selector-bar, .form-select, input {
+        display: none !important;
+    }
+}

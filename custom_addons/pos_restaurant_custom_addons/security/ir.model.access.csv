@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_online_order_user,online.order.user,model_online_order,group_online_order_user,1,1,1,0
+access_online_order_manager,online.order.manager,model_online_order,group_online_order_manager,1,1,1,1
+access_restaurant_petty_cash_user,restaurant.petty.cash.user,model_restaurant_petty_cash,group_online_order_user,1,1,1,0
+access_restaurant_petty_cash_manager,restaurant.petty.cash.manager,model_restaurant_petty_cash,group_online_order_manager,1,1,1,1
