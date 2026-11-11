@@ -69,25 +69,6 @@ export class RestaurantManagementDashboard extends Component {
             newUserRole: "Kasir Cabang",
             newUserBranch: "Cabang Dago",
 
-            // Data Struktur Cabang
-            branchesList: [
-                { id: 1, name: "Cabang Dago (Utama)", address: "Jl. Ir. H. Juanda No. 88, Bandung", phone: "022-2501234", manager: "Administrator", status: "Operasional" },
-                { id: 2, name: "Cabang Dipatiukur", address: "Jl. Dipatiukur No. 42, Bandung", phone: "022-2505678", manager: "Budi Santoso", status: "Operasional" },
-                { id: 3, name: "Cabang Riau", address: "Jl. L.L.R.E Martadinata No. 56, Bandung", phone: "022-7209876", manager: "Citra Lestari", status: "Operasional" },
-                { id: 4, name: "Cabang Buah Batu", address: "Jl. Buah Batu No. 120, Bandung", phone: "022-7301122", manager: "Doni Setiawan", status: "Operasional" },
-            ],
-            newBranchName: "",
-            newBranchAddress: "",
-            newBranchPhone: "",
-            newBranchManager: "",
-
-            // Integrasi Platform Delivery
-            deliveryPlatforms: [
-                { name: "Sheepo Food", merchant_id: "SHP-BDO-091", status: "Terhubung (Online)", sync: "Otomatis", is_active: true },
-                { name: "Grob Food", merchant_id: "GRB-RESTO-441", status: "Terhubung (Online)", sync: "Otomatis", is_active: true },
-                { name: "Gejok Food", merchant_id: "GJK-FOOD-228", status: "Terhubung (Online)", sync: "Otomatis", is_active: true },
-            ],
-
             // Kategori Petty Cash (Wewenang Finance / GM)
             pettyCategories: [
                 "Bahan Baku & Dapur Darurat (Bumbu, Es Batu, Sayur)",
@@ -126,10 +107,10 @@ export class RestaurantManagementDashboard extends Component {
                 {
                     timestamp: "07 Nov 2026, 17:30 WIB",
                     user: "admin",
-                    section: "Integrasi Delivery",
+                    section: "Akun & Hak Akses",
                     branch: "Cabang Dago",
-                    description: "Aktivasi integrasi merchant Sheepo Food ID SHP-BDO-091",
-                    status: "Terhubung",
+                    description: "Pemberian hak akses Kasir Cabang untuk Budi Santoso",
+                    status: "Aktif",
                 },
                 {
                     timestamp: "07 Nov 2026, 11:20 WIB",
@@ -160,10 +141,8 @@ export class RestaurantManagementDashboard extends Component {
     isRoleAuthorized(section) {
         const role = this.state.configRole;
         if (role === "admin") {
-            // Admin berwenang pada: Akun Pengguna, Struktur Cabang, Menu & Harga, Integrasi Delivery, dan Audit Log
-            return ["users", "branches", "menu_prices", "delivery_integrations", "audit_log"].includes(section);
+            return ["menu_prices", "users", "audit_log"].includes(section);
         } else if (role === "finance" || role === "gm") {
-            // Finance & GM berwenang pada: Kategori Kas Kecil, Batas Toleransi, dan Audit Log
             return ["petty_categories", "tolerance_limit", "audit_log"].includes(section);
         }
         return false;
@@ -221,36 +200,6 @@ export class RestaurantManagementDashboard extends Component {
         this.state.newMenuName = "";
         this.state.newMenuPrice = "";
         this.state.configSuccessMessage = `Menu "${newItem.name}" berhasil disimpan dan langsung aktif di ${newItem.branches}.`;
-        this.notification.add(this.state.configSuccessMessage, { type: "success" });
-    }
-
-    // 2. Simpan Cabang Baru (Admin)
-    saveNewBranch() {
-        this.state.configErrorMessage = "";
-        this.state.configSuccessMessage = "";
-
-        if (!this.state.newBranchName.trim()) {
-            this.state.configErrorMessage = "Nama cabang tidak boleh kosong!";
-            return;
-        }
-
-        const newBranch = {
-            id: this.state.branchesList.length + 1,
-            name: this.state.newBranchName.trim(),
-            address: this.state.newBranchAddress.trim() || "Bandung",
-            phone: this.state.newBranchPhone.trim() || "-",
-            manager: this.state.newBranchManager.trim() || "Kepala Toko Cabang",
-            status: "Operasional",
-        };
-
-        this.state.branchesList.push(newBranch);
-        this.recordAuditLog("Struktur Cabang", `Pendaftaran cabang baru "${newBranch.name}" (Manager: ${newBranch.manager})`, newBranch.name);
-
-        this.state.newBranchName = "";
-        this.state.newBranchAddress = "";
-        this.state.newBranchPhone = "";
-        this.state.newBranchManager = "";
-        this.state.configSuccessMessage = `Cabang "${newBranch.name}" berhasil didaftarkan dan aktif dalam sistem.`;
         this.notification.add(this.state.configSuccessMessage, { type: "success" });
     }
 
@@ -318,14 +267,6 @@ export class RestaurantManagementDashboard extends Component {
 
         this.state.configSuccessMessage = `Batas toleransi selisih berhasil diperbarui menjadi ${this.formatRupiah(tolNum)}.`;
         this.notification.add(this.state.configSuccessMessage, { type: "success" });
-    }
-
-    // Toggle Integrasi Delivery Platform
-    togglePlatform(platform) {
-        platform.is_active = !platform.is_active;
-        platform.status = platform.is_active ? "Terhubung (Online)" : "Dinonaktifkan (Offline)";
-        this.recordAuditLog("Integrasi Delivery", `Status integrasi ${platform.name} diubah menjadi ${platform.status}`);
-        this.notification.add(`Status integrasi ${platform.name} diperbarui: ${platform.status}`, { type: "info" });
     }
 
     // ==========================================

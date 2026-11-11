@@ -11,7 +11,7 @@ export class OnlineOrdersPopup extends AbstractAwaitablePopup {
     static template = "pos_restaurant_custom_addons.OnlineOrdersPopup";
     static defaultProps = {
         closePopup: "Tutup",
-        title: "Pesanan Online Masuk (Sheepo, Grob, Gejok)",
+        title: "Pesanan Online",
     };
 
     setup() {

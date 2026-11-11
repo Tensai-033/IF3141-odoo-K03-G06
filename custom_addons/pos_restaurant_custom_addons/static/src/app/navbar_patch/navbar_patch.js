@@ -14,12 +14,16 @@ Navbar.components = {
 
 patch(Navbar.prototype, {
     async onPettyCashClick() {
-        this.closeMenu();
+        if (typeof this.closeMenu === "function") {
+            this.closeMenu();
+        }
         await this.popup.add(PettyCashPopup);
     },
 
     async onDailyReportClick() {
-        this.closeMenu();
+        if (typeof this.closeMenu === "function") {
+            this.closeMenu();
+        }
         await this.popup.add(BranchDailyReportPopup);
     },
 });

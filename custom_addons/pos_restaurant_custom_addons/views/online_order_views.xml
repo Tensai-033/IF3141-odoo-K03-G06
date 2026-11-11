@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Tree / List View -->
     <record id="view_online_order_tree" model="ir.ui.view">
         <field name="name">online.order.tree</field>
         <field name="model">online.order</field>
@@ -20,7 +19,6 @@
         </field>
     </record>
 
-    <!-- Form View -->
     <record id="view_online_order_form" model="ir.ui.view">
         <field name="name">online.order.form</field>
         <field name="model">online.order</field>
@@ -70,9 +68,8 @@
         </field>
     </record>
 
-    <!-- Window Action -->
     <record id="action_online_order" model="ir.actions.act_window">
-        <field name="name">Pesanan Online (Sheepo, Grob, Gejok)</field>
+        <field name="name">Pesanan Online</field>
         <field name="res_model">online.order</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">

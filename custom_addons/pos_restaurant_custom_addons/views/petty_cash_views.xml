@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Tree / List View Petty Cash -->
     <record id="view_restaurant_petty_cash_tree" model="ir.ui.view">
         <field name="name">restaurant.petty.cash.tree</field>
         <field name="model">restaurant.petty.cash</field>
@@ -17,7 +16,6 @@
         </field>
     </record>
 
-    <!-- Form View Petty Cash -->
     <record id="view_restaurant_petty_cash_form" model="ir.ui.view">
         <field name="name">restaurant.petty.cash.form</field>
         <field name="model">restaurant.petty.cash</field>
@@ -56,9 +54,8 @@
         </field>
     </record>
 
-    <!-- Window Action -->
     <record id="action_restaurant_petty_cash" model="ir.actions.act_window">
-        <field name="name">Kas Kecil (Petty Cash)</field>
+        <field name="name">Petty Cash</field>
         <field name="res_model">restaurant.petty.cash</field>
         <field name="view_mode">tree,form</field>
         <field name="help" type="html">

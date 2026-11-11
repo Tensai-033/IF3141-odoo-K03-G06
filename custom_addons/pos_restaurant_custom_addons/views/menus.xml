@@ -1,33 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Menu Utama di Navbar Odoo: Restoran & Online -->
+    
     <menuitem id="menu_restaurant_custom_root" 
               name="Restoran &amp; Online" 
               sequence="20"
               web_icon="pos_restaurant_custom_addons,static/description/icon.png"/>
 
-    <!-- Submenu 1: Portal Manajemen & Rekonsiliasi -->
     <menuitem id="menu_restaurant_dashboard" 
               name="Portal Manajemen &amp; Rekonsiliasi" 
               parent="menu_restaurant_custom_root" 
               action="action_restaurant_management_dashboard" 
               sequence="5"/>
 
-    <!-- Submenu 2: Pesanan Online Delivery -->
     <menuitem id="menu_online_order_list" 
-              name="Pesanan Online (Sheepo, Grob, Gejok)" 
+              name="Pesanan Online" 
               parent="menu_restaurant_custom_root" 
               action="action_online_order" 
               sequence="10"/>
 
-    <!-- Submenu 3: Kas Kecil -->
     <menuitem id="menu_petty_cash_list" 
-              name="Kas Kecil (Petty Cash)" 
+              name="Petty Cash" 
               parent="menu_restaurant_custom_root" 
               action="action_restaurant_petty_cash" 
               sequence="20"/>
 
-    <!-- Submenu 4: Konfigurasi & Hak Akses -->
     <menuitem id="menu_restaurant_configuration" 
               name="Konfigurasi &amp; Hak Akses" 
               parent="menu_restaurant_custom_root" 

@@ -17,21 +17,20 @@
             </header>
 
             <main class="modal-body p-4 overflow-auto" style="max-height: 65vh;">
-                <!-- Jika tidak ada pesanan baru -->
+                
                 <div t-if="store.pendingCount === 0" class="text-center py-5">
                     <i class="fa fa-check-circle text-success" style="font-size: 64px;"></i>
                     <h5 class="mt-3 fw-bold text-dark">Semua Pesanan Online Sudah Diproses</h5>
                     <p class="text-muted">Menunggu pesanan online baru dari aplikasi Sheepo, Grob, atau Gejok...</p>
                 </div>
 
-                <!-- Daftar Card Pesanan Online Delivery -->
                 <div t-else="" class="d-flex flex-column gap-3">
                     <t t-foreach="store.pendingOrders" t-as="order" t-key="order.id">
                         <div class="card shadow-sm border rounded-3 p-3">
-                            <!-- Header Card: Platform (Grob/Sheepo/Gejok), ID, Pelanggan -->
+                            
                             <div class="d-flex justify-content-between align-items-start border-bottom pb-2 mb-2">
                                 <div>
-                                    <!-- Badge Platform -->
+                                    
                                     <span class="badge fs-6 me-2 px-3 py-1 fw-bold"
                                           t-att-class="getPlatformBadge(order.platform).class">
                                         <i class="fa fa-shopping-bag me-1"></i>
@@ -43,7 +42,6 @@
                                 </div>
                             </div>
 
-                            <!-- Target Jam Selesai & Waktu Masuk -->
                             <div class="d-flex justify-content-between align-items-center bg-danger-subtle text-danger border border-danger-subtle rounded-2 px-3 py-2 mb-2">
                                 <div class="small text-muted">
                                     <i class="fa fa-clock-o me-1"></i>
@@ -56,7 +54,6 @@
                                 </div>
                             </div>
 
-                            <!-- Info Driver Ojol -->
                             <div class="bg-light rounded p-2 mb-2 d-flex justify-content-between align-items-center small">
                                 <div>
                                     <i class="fa fa-motorcycle text-secondary me-1"></i>
@@ -67,13 +64,11 @@
                                 </div>
                             </div>
 
-                            <!-- Catatan Pelanggan (jika ada) -->
                             <div t-if="order.notes" class="alert alert-warning py-1 px-2 mb-2 small">
                                 <i class="fa fa-sticky-note-o me-1"></i>
                                 <strong>Catatan:</strong> <t t-esc="order.notes"/>
                             </div>
 
-                            <!-- List Item Pesanan Makanan/Minuman -->
                             <div class="table-responsive mb-2">
                                 <table class="table table-sm table-borderless m-0">
                                     <tbody>
@@ -90,9 +85,8 @@
                                 </table>
                             </div>
 
-                            <!-- Footer Card: Subtotal, Diskon (Rupiah), Total & Tombol Aksi (ACC & Tolak) -->
                             <div class="d-flex justify-content-between align-items-end pt-2 border-top">
-                                <!-- Rincian Harga & Diskon Langsung Rupiah -->
+                                
                                 <div class="d-flex flex-column" style="min-width: 240px;">
                                     <div t-if="order.discount_amount" class="d-flex justify-content-between small text-muted">
                                         <span>Subtotal:</span>
@@ -108,7 +102,6 @@
                                     </div>
                                 </div>
 
-                                <!-- Tombol Aksi -->
                                 <div class="d-flex gap-2">
                                     <button class="btn btn-outline-danger btn-sm px-3" t-on-click="() => this.onReject(order)">
                                         <i class="fa fa-times me-1"></i> Tolak Pesanan

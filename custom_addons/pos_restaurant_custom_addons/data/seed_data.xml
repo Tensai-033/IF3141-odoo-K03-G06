@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data noupdate="0">
-        <!-- Pastikan akun admin bernama Administrator dan avatar inisial 'A' -->
+        
         <record id="base.partner_admin" model="res.partner">
             <field name="name">Administrator</field>
             <field name="image_1920" eval="False"/>
         </record>
 
-        <!-- Contoh Catatan Kas Kecil -->
         <record id="petty_cash_sample_1" model="restaurant.petty.cash">
             <field name="name">PC/20261108/001</field>
             <field name="amount">44000</field>
@@ -24,7 +23,6 @@
             <field name="cashier_id" ref="base.user_admin"/>
         </record>
 
-        <!-- Contoh Pesanan Online Masuk -->
         <record id="online_order_sample_1" model="online.order">
             <field name="name">GRB-8901</field>
             <field name="platform">grob</field>

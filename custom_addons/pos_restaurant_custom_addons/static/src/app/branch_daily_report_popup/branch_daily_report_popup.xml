@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <templates id="template" xml:space="preserve">
 
-    <!-- Modal Laporan Harian Monokrom Sederhana Berdasarkan Sesi POS -->
     <t t-name="pos_restaurant_custom_addons.BranchDailyReportPopup">
         <div class="popup branch-daily-report-popup modal-dialog-scrollable" style="max-width: 860px; width: 95%; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.25);">
-            <!-- Header Modal Sederhana -->
+            
             <header class="modal-header d-flex justify-content-between align-items-center bg-white border-bottom px-4 py-3" style="background-color: #ffffff !important; border-bottom: 1px solid #dee2e6 !important;">
                 <div class="d-flex align-items-center gap-2">
                     <i class="fa fa-file-text-o text-dark fs-5"></i>
@@ -18,18 +17,15 @@
                 </button>
             </header>
 
-            <!-- Kertas Laporan Monokrom (Format Template Standar Odoo) -->
             <main class="modal-body p-4 overflow-auto bg-white" style="max-height: 75vh; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; color: #000000;">
                 <div class="report-paper bg-white p-4 text-dark" style="max-width: 780px; margin: 0 auto; color: #000000;">
                     
-                    <!-- Top Bar: Waktu, Nama Toko, Halaman -->
                     <div class="d-flex justify-content-between align-items-center small text-dark mb-3 pb-1" style="font-size: 13px;">
                         <span><t t-esc="printDateTime"/></span>
                         <span class="fw-semibold text-center"><t t-esc="companyName"/></span>
                         <span>1 / 1</span>
                     </div>
 
-                    <!-- Judul Laporan -->
                     <div class="text-center mb-3">
                         <h2 class="fw-normal text-dark m-0" style="letter-spacing: -0.5px; font-size: 28px;">Daily Sales Report</h2>
                         <div class="text-secondary small mt-1" style="font-size: 13px;">
@@ -37,7 +33,6 @@
                         </div>
                     </div>
 
-                    <!-- Pilihan Tampilkan Laporan Berdasarkan Sesi POS -->
                     <div class="session-selector-bar d-flex justify-content-center align-items-center gap-2 mb-4 p-2 bg-light border rounded">
                         <label class="fw-bold small text-dark m-0 d-flex align-items-center">
                             <i class="fa fa-filter me-1 text-secondary"></i> Pilih Sesi:
@@ -55,7 +50,6 @@
                         </button>
                     </div>
 
-                    <!-- 1. Seksi Sales (Penjualan Kategori & Menu Restoran) -->
                     <div class="mb-4">
                         <h4 class="fw-normal text-dark mb-2" style="font-size: 20px;">Sales</h4>
                         <table class="table table-sm m-0 align-middle odoo-report-table" style="font-size: 13px; border-collapse: collapse; width: 100%;">
@@ -69,14 +63,14 @@
                             </thead>
                             <tbody>
                                 <t t-foreach="salesGrouped" t-as="group" t-key="group.name">
-                                    <!-- Baris Kategori dengan latar abu-abu muda -->
+                                    
                                     <tr style="background-color: #f2f2f2; font-weight: 600;">
                                         <td style="padding: 4px 8px;" t-esc="group.name"/>
                                         <td style="padding: 4px 8px;"></td>
                                         <td class="text-end" style="padding: 4px 8px;" t-esc="group.qty.toFixed(1)"/>
                                         <td class="text-end" style="padding: 4px 8px;" t-esc="formatCurrency(group.total)"/>
                                     </tr>
-                                    <!-- Baris Produk yang menjorok ke dalam -->
+                                    
                                     <t t-foreach="group.items" t-as="item" t-key="item.name">
                                         <tr style="border-bottom: 1px solid #f0f0f0;">
                                             <td style="padding: 3px 8px;"></td>
@@ -98,7 +92,6 @@
                         </table>
                     </div>
 
-                    <!-- 2. Seksi Pesanan Online Delivery (Sheepo, Grob, Gejok) -->
                     <div class="mb-4">
                         <h4 class="fw-normal text-dark mb-2" style="font-size: 20px;">Online Delivery Sales (Sheepo, Grob, Gejok)</h4>
                         <table class="table table-sm m-0 align-middle odoo-report-table" style="font-size: 13px; border-collapse: collapse; width: 100%;">
@@ -131,7 +124,6 @@
                         </table>
                     </div>
 
-                    <!-- 3. Seksi Pengeluaran Kas Kecil (Petty Cash Expenses) - NOMINAL POSITIF MURNI -->
                     <div class="mb-4">
                         <h4 class="fw-normal text-dark mb-2" style="font-size: 20px;">Petty Cash Expenses</h4>
                         <table class="table table-sm m-0 align-middle odoo-report-table" style="font-size: 13px; border-collapse: collapse; width: 100%;">
@@ -151,7 +143,7 @@
                                         <td style="padding: 4px 8px;" t-esc="r.time"/>
                                         <td style="padding: 4px 8px;" t-esc="r.category"/>
                                         <td style="padding: 4px 8px;" t-esc="r.notes"/>
-                                        <!-- Nominal pengeluaran positif murni, tanpa minus -->
+                                        
                                         <td class="text-end" style="padding: 4px 8px;" t-esc="formatCurrency(r.amount)"/>
                                     </tr>
                                 </t>
@@ -159,14 +151,13 @@
                             <tfoot>
                                 <tr style="background-color: #d1d5db; font-weight: bold; border-top: 1px solid #000; border-bottom: 1px solid #000;">
                                     <td colspan="4" style="padding: 4px 8px;">Total Petty Cash Expenses</td>
-                                    <!-- Total pengeluaran positif murni, tanpa minus -->
+                                    
                                     <td class="text-end" style="padding: 4px 8px;" t-esc="formatCurrency(totalPettyCashExpenses)"/>
                                 </tr>
                             </tfoot>
                         </table>
                     </div>
 
-                    <!-- 4. Seksi Payments (Metode Pembayaran Sesuai Gambar Referensi 2) -->
                     <div class="mb-4">
                         <h4 class="fw-normal text-dark mb-2" style="font-size: 20px;">Payments</h4>
                         <table class="table table-sm m-0 align-middle odoo-report-table" style="font-size: 13px; border-collapse: collapse; width: 100%;">
@@ -193,18 +184,16 @@
                         </table>
                     </div>
 
-                    <!-- 5. Seksi Discounts -->
                     <div class="mb-4" style="font-size: 13.5px;">
                         <h4 class="fw-normal text-dark mb-2" style="font-size: 20px;">Discounts:</h4>
                         <div><strong>Number of discounts:</strong> <t t-esc="onlineOrdersList.length > 0 ? '2' : '0'"/></div>
                         <div><strong>Amount of discounts:</strong> <t t-esc="formatCurrency(totalOnlineDiscounts)"/></div>
                     </div>
 
-                    <!-- 6. Seksi Session Control (Ringkasan Akhir) -->
                     <div class="mb-4 pt-2" style="font-size: 13.5px; border-top: 1px solid #ccc;">
                         <h4 class="fw-normal text-dark mb-2" style="font-size: 20px;">Session Control</h4>
                         <div><strong>Total Gross Sales:</strong> <t t-esc="formatCurrency(totalGrossSales)"/></div>
-                        <!-- Ditandai sebagai total pengeluaran bukan pergerakan uang/pendapatan, tanpa tanda minus -->
+                        
                         <div><strong>Total Petty Cash Expenses:</strong> <t t-esc="formatCurrency(totalPettyCashExpenses)"/></div>
                         <div><strong>Net Session Revenue:</strong> <t t-esc="formatCurrency(netSessionRevenue)"/></div>
                         <div class="mt-1"><strong>Number of transactions:</strong> <t t-esc="totalSalesQuantity + onlineOrdersList.length"/></div>
@@ -213,7 +202,6 @@
                 </div>
             </main>
 
-            <!-- Footer Aksi -->
             <footer class="modal-footer bg-light border-top px-4 py-2 d-flex justify-content-between">
                 <button class="btn btn-secondary px-4" t-on-click="cancel">
                     <t t-esc="props.closePopup"/>

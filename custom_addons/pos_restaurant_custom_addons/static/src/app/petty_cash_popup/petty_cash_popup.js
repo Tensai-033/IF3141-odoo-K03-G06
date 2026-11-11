@@ -13,7 +13,7 @@ export class PettyCashPopup extends AbstractAwaitablePopup {
     static template = "pos_restaurant_custom_addons.PettyCashPopup";
     static defaultProps = {
         closePopup: "Tutup",
-        title: "Kas Kecil (Petty Cash) - Kepala Toko",
+        title: "Petty Cash",
     };
 
     setup() {
