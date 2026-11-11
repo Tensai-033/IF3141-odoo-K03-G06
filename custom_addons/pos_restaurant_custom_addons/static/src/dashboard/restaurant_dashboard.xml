@@ -2,33 +2,29 @@
 <templates id="template" xml:space="preserve">
     <t t-name="pos_restaurant_custom_addons.RestaurantDashboard">
         <div class="restaurant-management-dashboard p-4 pb-5 bg-light overflow-auto h-100">
-            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center mb-4 pb-3 border-bottom bg-white p-3 rounded-3 shadow-sm">
-                <div>
-                    <h3 class="fw-bold text-dark m-0 d-flex align-items-center">
-                        <i class="fa fa-cutlery me-2 text-primary"></i> Portal Manajemen Restoran
-                    </h3>
-                    <small class="text-muted">Monitoring Penjualan, Rekonsiliasi Kas Cabang, dan Kebutuhan Logistik Bahan Baku</small>
-                </div>
-                <div class="btn-group mt-3 mt-md-0 shadow-sm" role="group">
-                    <button type="button"
-                            class="btn fw-semibold px-4 py-2"
-                            t-att-class="state.activeTab === 'reconciliation' ? 'btn-primary' : 'btn-outline-primary'"
-                            t-on-click="() => this.state.activeTab = 'reconciliation'">
-                        <i class="fa fa-balance-scale me-2"></i> Rekonsiliasi Harian
-                    </button>
-                    <button type="button"
-                            class="btn fw-semibold px-4 py-2"
-                            t-att-class="state.activeTab === 'sales_reports' ? 'btn-primary' : 'btn-outline-primary'"
-                            t-on-click="() => this.state.activeTab = 'sales_reports'">
-                        <i class="fa fa-bar-chart me-2"></i> Laporan Penjualan
-                    </button>
-                    <button type="button"
-                            class="btn fw-semibold px-4 py-2"
-                            t-att-class="state.activeTab === 'configuration' ? 'btn-primary' : 'btn-outline-primary'"
-                            t-on-click="() => this.state.activeTab = 'configuration'">
-                        <i class="fa fa-cogs me-2"></i> Konfigurasi &amp; Hak Akses
-                    </button>
-                </div>
+            <div class="mb-4 pb-3 border-bottom bg-white p-3 rounded-3 shadow-sm">
+                <h3 class="fw-bold text-dark m-0 d-flex align-items-center">
+                    <t t-if="state.activeTab === 'reconciliation'">
+                        <i class="fa fa-balance-scale me-2 text-primary"></i> Rekonsiliasi Harian
+                    </t>
+                    <t t-elif="state.activeTab === 'sales_reports'">
+                        <i class="fa fa-bar-chart me-2 text-primary"></i> Laporan Penjualan
+                    </t>
+                    <t t-else="">
+                        <i class="fa fa-cogs me-2 text-primary"></i> Konfigurasi &amp; Hak Akses
+                    </t>
+                </h3>
+                <small class="text-muted">
+                    <t t-if="state.activeTab === 'reconciliation'">
+                        Pencocokan data penjualan kasir sistem terhadap kas fisik, setoran, dan mutasi EDC per cabang
+                    </t>
+                    <t t-elif="state.activeTab === 'sales_reports'">
+                        Laporan item terjual logistik ayam, performa penjualan kanal online, dan konsolidasi seluruh cabang
+                    </t>
+                    <t t-else="">
+                        Pengelolaan menu &amp; harga, kategori kas kecil, batas toleransi, akun pengguna, serta log audit
+                    </t>
+                </small>
             </div>
             <div t-if="state.activeTab === 'reconciliation'" class="tab-reconciliation">
                 <div class="card p-3 mb-4 bg-white border rounded-3 shadow-sm">

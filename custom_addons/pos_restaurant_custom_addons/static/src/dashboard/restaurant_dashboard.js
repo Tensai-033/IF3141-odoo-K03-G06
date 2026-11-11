@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
 import { registry } from "@web/core/registry";
-import { Component, useState } from "@odoo/owl";
+import { Component, useState, onWillUpdateProps } from "@odoo/owl";
 import { useService } from "@web/core/utils/hooks";
 
 /**
@@ -13,13 +13,34 @@ export class RestaurantManagementDashboard extends Component {
     setup() {
         this.notification = useService("notification");
 
+        const getTabFromProps = (props) => {
+            if (this.constructor.defaultTab) {
+                return this.constructor.defaultTab;
+            }
+            const tag = props?.action?.tag;
+            if (tag === "restaurant_sales_reports_dashboard") return "sales_reports";
+            if (tag === "restaurant_configuration_dashboard") return "configuration";
+            if (tag === "restaurant_reconciliation_dashboard") return "reconciliation";
+
+            const ctx = props?.action?.context;
+            if (ctx && typeof ctx === "object" && ctx.default_tab) {
+                return ctx.default_tab;
+            }
+            if (typeof ctx === "string") {
+                if (ctx.includes("sales_reports")) return "sales_reports";
+                if (ctx.includes("configuration")) return "configuration";
+            }
+            return props?.action?.params?.default_tab || "reconciliation";
+        };
+
+        const initialTab = getTabFromProps(this.props);
+
         const now = new Date();
         const timeNow = now.toLocaleTimeString("id-ID", { hour: "2-digit", minute: "2-digit" }) + " WIB";
         const dateNow = now.toLocaleDateString("id-ID", { day: "numeric", month: "short", year: "numeric" });
 
         this.state = useState({
-            // Tab Aktif: 'reconciliation', 'sales_reports', atau 'configuration'
-            activeTab: "reconciliation",
+            activeTab: initialTab,
 
             // Filter Rekonsiliasi Harian
             reconBranch: "branch_dago",
@@ -125,6 +146,13 @@ export class RestaurantManagementDashboard extends Component {
             // Pesan Error Validasi Form
             configErrorMessage: "",
             configSuccessMessage: "",
+        });
+
+        onWillUpdateProps((nextProps) => {
+            const nextTab = getTabFromProps(nextProps);
+            if (nextTab && nextTab !== this.state.activeTab) {
+                this.state.activeTab = nextTab;
+            }
         });
     }
 
@@ -506,4 +534,19 @@ export class RestaurantManagementDashboard extends Component {
     }
 }
 
+export class RestaurantReconciliationDashboard extends RestaurantManagementDashboard {
+    static defaultTab = "reconciliation";
+}
+
+export class RestaurantSalesReportsDashboard extends RestaurantManagementDashboard {
+    static defaultTab = "sales_reports";
+}
+
+export class RestaurantConfigurationDashboard extends RestaurantManagementDashboard {
+    static defaultTab = "configuration";
+}
+
 registry.category("actions").add("restaurant_management_dashboard", RestaurantManagementDashboard);
+registry.category("actions").add("restaurant_reconciliation_dashboard", RestaurantReconciliationDashboard);
+registry.category("actions").add("restaurant_sales_reports_dashboard", RestaurantSalesReportsDashboard);
+registry.category("actions").add("restaurant_configuration_dashboard", RestaurantConfigurationDashboard);

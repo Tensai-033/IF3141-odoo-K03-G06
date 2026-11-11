@@ -6,17 +6,23 @@
               sequence="20"
               web_icon="pos_restaurant_custom_addons,static/description/icon.png"/>
 
-    <menuitem id="menu_restaurant_dashboard" 
-              name="Portal Manajemen &amp; Rekonsiliasi" 
+    <menuitem id="menu_restaurant_reconciliation" 
+              name="Rekonsiliasi Harian" 
               parent="menu_restaurant_custom_root" 
-              action="action_restaurant_management_dashboard" 
+              action="action_restaurant_reconciliation" 
               sequence="5"/>
+
+    <menuitem id="menu_restaurant_sales_reports" 
+              name="Laporan Penjualan" 
+              parent="menu_restaurant_custom_root" 
+              action="action_restaurant_sales_reports" 
+              sequence="10"/>
 
     <menuitem id="menu_online_order_list" 
               name="Pesanan Online" 
               parent="menu_restaurant_custom_root" 
               action="action_online_order" 
-              sequence="10"/>
+              sequence="15"/>
 
     <menuitem id="menu_petty_cash_list" 
               name="Petty Cash" 
@@ -27,6 +33,7 @@
     <menuitem id="menu_restaurant_configuration" 
               name="Konfigurasi &amp; Hak Akses" 
               parent="menu_restaurant_custom_root" 
-              action="action_restaurant_management_dashboard" 
+              action="action_restaurant_configuration" 
               sequence="25"/>
+
 </odoo>

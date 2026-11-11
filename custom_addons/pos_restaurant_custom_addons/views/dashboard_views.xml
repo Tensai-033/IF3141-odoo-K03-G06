@@ -2,8 +2,31 @@
 <odoo>
     
     <record id="action_restaurant_management_dashboard" model="ir.actions.client">
-        <field name="name">Dashboard Manajemen &amp; Rekonsiliasi</field>
+        <field name="name">Portal Manajemen Restoran</field>
         <field name="tag">restaurant_management_dashboard</field>
         <field name="target">current</field>
+        <field name="context">{'default_tab': 'reconciliation'}</field>
     </record>
+
+    <record id="action_restaurant_reconciliation" model="ir.actions.client">
+        <field name="name">Rekonsiliasi Harian</field>
+        <field name="tag">restaurant_reconciliation_dashboard</field>
+        <field name="target">current</field>
+        <field name="context">{'default_tab': 'reconciliation'}</field>
+    </record>
+
+    <record id="action_restaurant_sales_reports" model="ir.actions.client">
+        <field name="name">Laporan Penjualan</field>
+        <field name="tag">restaurant_sales_reports_dashboard</field>
+        <field name="target">current</field>
+        <field name="context">{'default_tab': 'sales_reports'}</field>
+    </record>
+
+    <record id="action_restaurant_configuration" model="ir.actions.client">
+        <field name="name">Konfigurasi &amp; Hak Akses</field>
+        <field name="tag">restaurant_configuration_dashboard</field>
+        <field name="target">current</field>
+        <field name="context">{'default_tab': 'configuration'}</field>
+    </record>
+
 </odoo>
