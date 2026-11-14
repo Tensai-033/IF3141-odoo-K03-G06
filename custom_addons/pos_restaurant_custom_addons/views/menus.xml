@@ -3,8 +3,7 @@
     
     <menuitem id="menu_restaurant_custom_root" 
               name="Restoran &amp; Online" 
-              sequence="20"
-              web_icon="pos_restaurant_custom_addons,static/description/icon.png"/>
+              sequence="20"/>
 
     <menuitem id="menu_restaurant_reconciliation" 
               name="Rekonsiliasi Harian" 
