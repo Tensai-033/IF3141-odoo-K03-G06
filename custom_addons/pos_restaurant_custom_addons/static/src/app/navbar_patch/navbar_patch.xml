@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_restaurant_custom_addons.Navbar" t-inherit="point_of_sale.Navbar" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('status-buttons')]" position="inside">
+            
+            <div class="oe_status cursor-pointer d-flex align-items-center px-3 py-1 me-2 btn btn-outline-success border rounded-pill my-auto"
+                 t-on-click="onPettyCashClick"
+                 title="Petty Cash"
+                 style="height: 38px;">
+                <i class="fa fa-money fs-5 me-2 text-success"></i>
+                <span class="d-none d-md-inline fw-semibold text-dark">Petty Cash</span>
+            </div>
+
+            <div class="oe_status cursor-pointer d-flex align-items-center px-3 py-1 me-2 btn btn-outline-dark border rounded-pill my-auto"
+                 t-on-click="onDailyReportClick"
+                 title="Pilih &amp; Tampilkan Laporan Harian Berdasarkan Sesi POS"
+                 style="height: 38px;">
+                <i class="fa fa-calendar-check-o fs-5 me-2 text-dark"></i>
+                <span class="d-none d-md-inline fw-semibold text-dark">Laporan Sesi</span>
+            </div>
+
+            <OnlineOrdersButton />
+        </xpath>
+    </t>
+
+</templates>

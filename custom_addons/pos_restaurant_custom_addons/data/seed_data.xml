@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        
+        <record id="base.partner_admin" model="res.partner">
+            <field name="name">Administrator</field>
+            <field name="image_1920" eval="False"/>
+        </record>
+
+        <record id="petty_cash_sample_1" model="restaurant.petty.cash">
+            <field name="name">PC/20261108/001</field>
+            <field name="amount">44000</field>
+            <field name="category">gas_lpg</field>
+            <field name="notes">Beli 2 tabung gas elpiji 3kg di pangkalan karena stok dapur habis</field>
+            <field name="cashier_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="petty_cash_sample_2" model="restaurant.petty.cash">
+            <field name="name">PC/20261108/002</field>
+            <field name="amount">25000</field>
+            <field name="category">hygiene</field>
+            <field name="notes">Beli sabun cuci piring Sunlight 750ml dan spons kawat</field>
+            <field name="cashier_id" ref="base.user_admin"/>
+        </record>
+
+        <record id="online_order_sample_1" model="online.order">
+            <field name="name">GRB-8901</field>
+            <field name="platform">grob</field>
+            <field name="customer_name">Budi Santoso</field>
+            <field name="customer_phone">0812-3456-7890</field>
+            <field name="driver_name">Ahmad Driver (Grob)</field>
+            <field name="driver_phone">0857-1122-3344</field>
+            <field name="driver_plate">D 4512 AB</field>
+            <field name="ready_by">10:35 WIB</field>
+            <field name="subtotal_amount">85000</field>
+            <field name="discount_amount">10000</field>
+            <field name="total_amount">75000</field>
+            <field name="notes">Jangan terlalu pedas, sambal dipisah ya mas</field>
+            <field name="state">pending</field>
+        </record>
+
+        <record id="online_order_sample_2" model="online.order">
+            <field name="name">SHP-4402</field>
+            <field name="platform">sheepo</field>
+            <field name="customer_name">Siti Rahma</field>
+            <field name="customer_phone">0813-9988-7766</field>
+            <field name="driver_name">Rian Shopee</field>
+            <field name="driver_phone">0878-5544-3322</field>
+            <field name="driver_plate">D 1980 XYZ</field>
+            <field name="ready_by">10:45 WIB</field>
+            <field name="subtotal_amount">120000</field>
+            <field name="discount_amount">15000</field>
+            <field name="total_amount">105000</field>
+            <field name="notes">Sendok garpu plastik 3 set mohon disertakan</field>
+            <field name="state">pending</field>
+        </record>
+
+        <record id="online_order_sample_3" model="online.order">
+            <field name="name">GJK-3129</field>
+            <field name="platform">gejok</field>
+            <field name="customer_name">Hendra Gunawan</field>
+            <field name="customer_phone">0821-6677-8899</field>
+            <field name="driver_name">Bambang Gojek</field>
+            <field name="driver_phone">0819-2233-4455</field>
+            <field name="driver_plate">D 6723 KL</field>
+            <field name="ready_by">10:55 WIB</field>
+            <field name="subtotal_amount">54000</field>
+            <field name="discount_amount">0</field>
+            <field name="total_amount">54000</field>
+            <field name="notes">Es teh manisnya sedikit es batu saja</field>
+            <field name="state">pending</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_restaurant_custom_addons.FloorScreen" t-inherit="pos_restaurant.FloorScreen" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('floor-selector')]" position="inside">
+            <button class="button btn btn-outline-success p-3 rounded-0 fw-bold d-flex align-items-center ms-1 border-start" 
+                    t-on-click="onPettyCashClick" 
+                    title="Petty Cash">
+                <i class="fa fa-money me-2 fs-4 text-success"></i>
+                <span class="d-none d-sm-inline">Petty Cash</span>
+            </button>
+        </xpath>
+    </t>
+
+</templates>

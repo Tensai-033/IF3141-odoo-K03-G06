@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <menuitem id="menu_restaurant_custom_root" 
+              name="Restoran &amp; Online" 
+              sequence="20"/>
+
+    <menuitem id="menu_restaurant_reconciliation" 
+              name="Rekonsiliasi Harian" 
+              parent="menu_restaurant_custom_root" 
+              action="action_restaurant_reconciliation" 
+              sequence="5"/>
+
+    <menuitem id="menu_restaurant_sales_reports" 
+              name="Laporan Penjualan" 
+              parent="menu_restaurant_custom_root" 
+              action="action_restaurant_sales_reports" 
+              sequence="10"/>
+
+    <menuitem id="menu_online_order_list" 
+              name="Pesanan Online" 
+              parent="menu_restaurant_custom_root" 
+              action="action_online_order" 
+              sequence="15"/>
+
+    <menuitem id="menu_petty_cash_list" 
+              name="Petty Cash" 
+              parent="menu_restaurant_custom_root" 
+              action="action_restaurant_petty_cash" 
+              sequence="20"/>
+
+    <menuitem id="menu_restaurant_configuration" 
+              name="Konfigurasi &amp; Hak Akses" 
+              parent="menu_restaurant_custom_root" 
+              action="action_restaurant_configuration" 
+              sequence="25"/>
+
+</odoo>

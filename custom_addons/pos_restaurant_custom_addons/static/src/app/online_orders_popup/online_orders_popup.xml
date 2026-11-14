@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_restaurant_custom_addons.OnlineOrdersPopup">
+        <div class="popup online-orders-popup modal-dialog-scrollable" style="max-width: 760px; width: 92%;">
+            <header class="modal-header d-flex justify-content-between align-items-center bg-light border-bottom px-4 py-3">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa fa-motorcycle text-primary fs-3"></i>
+                    <h4 class="modal-title fw-bold m-0" t-esc="props.title"/>
+                    <span t-if="store.pendingCount > 0" class="badge bg-danger rounded-pill ms-2 fs-6">
+                        <t t-esc="store.pendingCount"/> Baru
+                    </span>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary" t-on-click="cancel">
+                    <i class="fa fa-times"></i>
+                </button>
+            </header>
+
+            <main class="modal-body p-4 overflow-auto" style="max-height: 65vh;">
+                
+                <div t-if="store.pendingCount === 0" class="text-center py-5">
+                    <i class="fa fa-check-circle text-success" style="font-size: 64px;"></i>
+                    <h5 class="mt-3 fw-bold text-dark">Semua Pesanan Online Sudah Diproses</h5>
+                    <p class="text-muted">Menunggu pesanan online baru dari aplikasi Sheepo, Grob, atau Gejok...</p>
+                </div>
+
+                <div t-else="" class="d-flex flex-column gap-3">
+                    <t t-foreach="store.pendingOrders" t-as="order" t-key="order.id">
+                        <div class="card shadow-sm border rounded-3 p-3">
+                            
+                            <div class="d-flex justify-content-between align-items-start border-bottom pb-2 mb-2">
+                                <div>
+                                    
+                                    <span class="badge fs-6 me-2 px-3 py-1 fw-bold"
+                                          t-att-class="getPlatformBadge(order.platform).class">
+                                        <i class="fa fa-shopping-bag me-1"></i>
+                                        <t t-esc="getPlatformBadge(order.platform).label"/>
+                                    </span>
+                                    <span class="badge bg-dark fs-6 me-2" t-esc="'#' + order.id"/>
+                                    <strong class="fs-5" t-esc="order.customer_name"/>
+                                    <small class="text-muted ms-1" t-esc="'(' + order.customer_phone + ')'"/>
+                                </div>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-center bg-danger-subtle text-danger border border-danger-subtle rounded-2 px-3 py-2 mb-2">
+                                <div class="small text-muted">
+                                    <i class="fa fa-clock-o me-1"></i>
+                                    <span>Masuk: </span><strong class="text-dark" t-esc="order.created_at"/>
+                                </div>
+                                <div class="d-flex align-items-center">
+                                    <i class="fa fa-hourglass-half me-2 fs-5"></i>
+                                    <span class="fw-bold me-2">Harus Selesai Sebelum:</span>
+                                    <span class="badge bg-danger text-white fs-6 px-2 py-1 fw-bold" t-esc="order.ready_by"/>
+                                </div>
+                            </div>
+
+                            <div class="bg-light rounded p-2 mb-2 d-flex justify-content-between align-items-center small">
+                                <div>
+                                    <i class="fa fa-motorcycle text-secondary me-1"></i>
+                                    <strong>Driver:</strong> <span t-esc="order.driver_name"/>
+                                </div>
+                                <div>
+                                    <span class="badge bg-secondary" t-esc="'Plat: ' + order.driver_plate"/>
+                                </div>
+                            </div>
+
+                            <div t-if="order.notes" class="alert alert-warning py-1 px-2 mb-2 small">
+                                <i class="fa fa-sticky-note-o me-1"></i>
+                                <strong>Catatan:</strong> <t t-esc="order.notes"/>
+                            </div>
+
+                            <div class="table-responsive mb-2">
+                                <table class="table table-sm table-borderless m-0">
+                                    <tbody>
+                                        <t t-foreach="order.items" t-as="item" t-key="item.name">
+                                            <tr>
+                                                <td style="width: 10%;">
+                                                    <span class="badge bg-light text-dark border fw-bold" t-esc="item.qty + 'x'"/>
+                                                </td>
+                                                <td><span class="fw-semibold" t-esc="item.name"/></td>
+                                                <td class="text-end text-muted" style="width: 30%;" t-esc="formatRupiah(item.price * item.qty)"/>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="d-flex justify-content-between align-items-end pt-2 border-top">
+                                
+                                <div class="d-flex flex-column" style="min-width: 240px;">
+                                    <div t-if="order.discount_amount" class="d-flex justify-content-between small text-muted">
+                                        <span>Subtotal:</span>
+                                        <span t-esc="formatRupiah(order.subtotal)"/>
+                                    </div>
+                                    <div t-if="order.discount_amount" class="d-flex justify-content-between small text-danger fw-bold">
+                                        <span><i class="fa fa-tag me-1"></i>Diskon Promo:</span>
+                                        <span t-esc="'- ' + formatRupiah(order.discount_amount)"/>
+                                    </div>
+                                    <div class="d-flex justify-content-between align-items-baseline gap-3 border-top pt-1 mt-1">
+                                        <span class="small fw-bold text-dark">Total Tagihan:</span>
+                                        <strong class="fs-5 text-success" t-esc="formatRupiah(order.total)"/>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-outline-danger btn-sm px-3" t-on-click="() => this.onReject(order)">
+                                        <i class="fa fa-times me-1"></i> Tolak Pesanan
+                                    </button>
+                                    <button class="btn btn-success btn-sm px-4 fw-bold" t-on-click="() => this.onAccept(order)">
+                                        <i class="fa fa-check me-1"></i> Terima Pesanan
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </div>
+            </main>
+
+            <footer class="modal-footer bg-light border-top px-4 py-2 d-flex justify-content-end">
+                <button class="btn btn-secondary px-4" t-on-click="cancel">
+                    <t t-esc="props.closePopup"/>
+                </button>
+            </footer>
+        </div>
+    </t>
+
+</templates>

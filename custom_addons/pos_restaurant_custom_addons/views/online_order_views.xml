@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_online_order_tree" model="ir.ui.view">
+        <field name="name">online.order.tree</field>
+        <field name="model">online.order</field>
+        <field name="arch" type="xml">
+            <tree string="Daftar Pesanan Online" decoration-info="state == 'pending'" decoration-success="state == 'accepted'" decoration-danger="state == 'rejected'">
+                <field name="name"/>
+                <field name="platform" widget="badge" decoration-warning="platform == 'sheepo'" decoration-success="platform == 'grob'" decoration-danger="platform == 'gejok'"/>
+                <field name="customer_name"/>
+                <field name="driver_name"/>
+                <field name="ready_by"/>
+                <field name="subtotal_amount"/>
+                <field name="discount_amount"/>
+                <field name="total_amount"/>
+                <field name="state" widget="badge" decoration-info="state == 'pending'" decoration-success="state == 'accepted'" decoration-danger="state == 'rejected'"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_online_order_form" model="ir.ui.view">
+        <field name="name">online.order.form</field>
+        <field name="model">online.order</field>
+        <field name="arch" type="xml">
+            <form string="Pesanan Online">
+                <header>
+                    <button name="action_accept" string="ACC / Terima Pesanan" type="object" class="btn-success" invisible="state != 'pending'"/>
+                    <button name="action_reject" string="Tolak Pesanan" type="object" class="btn-danger" invisible="state != 'pending'"/>
+                    <field name="state" widget="statusbar" statusbar_visible="pending,accepted,rejected"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="Nomor Pesanan / Order ID"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Platform &amp; Pelanggan">
+                            <field name="platform" widget="radio"/>
+                            <field name="customer_name"/>
+                            <field name="customer_phone"/>
+                            <field name="ready_by" placeholder="e.g. 10:35 WIB"/>
+                        </group>
+                        <group string="Driver / Ojol">
+                            <field name="driver_name"/>
+                            <field name="driver_phone"/>
+                            <field name="driver_plate"/>
+                        </group>
+                    </group>
+                    <group string="Pembayaran (Rupiah) &amp; Catatan">
+                        <group>
+                            <field name="subtotal_amount"/>
+                            <field name="discount_amount"/>
+                            <field name="total_amount" class="oe_subtotal_footer_separator"/>
+                        </group>
+                        <group>
+                            <field name="notes" placeholder="Catatan pesanan dari aplikasi..."/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_online_order" model="ir.actions.act_window">
+        <field name="name">Pesanan Online</field>
+        <field name="res_model">online.order</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Belum ada pesanan online masuk dari Sheepo, Grob, atau Gejok.
+            </p>
+        </field>
+    </record>
+
+</odoo>

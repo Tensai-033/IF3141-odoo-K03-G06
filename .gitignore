@@ -34,3 +34,9 @@ dump/*
 
 # Logs
 *.log
+
+# Kode program PoS milik Odoo 
+# Diambil dari https://github.com/odoo/odoo/tree/17.0/addons/point_of_sale dan https://github.com/odoo/odoo/tree/17.0/addons/pos_restaurant
+reference_pos/
+reference_pos_restaurant/
+

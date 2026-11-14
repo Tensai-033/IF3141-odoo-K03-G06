@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_restaurant_custom_addons.KitchenTicketPopup">
+        <div class="popup kitchen-ticket-popup modal-dialog-scrollable" style="max-width: 480px; width: 90%;">
+            
+            <header class="modal-header d-flex justify-content-between align-items-center bg-dark text-white px-3 py-2 border-bottom">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa fa-cutlery"></i>
+                    <span class="fw-bold fs-6">KITCHEN ORDER TICKET</span>
+                </div>
+                <button type="button" class="btn btn-sm text-white" t-on-click="cancel">
+                    <i class="fa fa-times"></i>
+                </button>
+            </header>
+
+            <main class="modal-body p-3 overflow-auto bg-light" style="max-height: 70vh;">
+                <div class="kitchen-ticket-receipt p-3 bg-white border border-dark rounded-1 shadow-sm text-dark" 
+                     style="font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.4;">
+                    
+                    <div class="text-center mb-2">
+                        <div class="fw-bold fs-5 text-uppercase">TIKET DAPUR (KITCHEN)</div>
+                        <div class="small text-muted">*** PESANAN BARU RESTORAN ***</div>
+                        <div class="border-top border-dark border-2 my-1"></div>
+                    </div>
+
+                    <div class="mb-2">
+                        <div class="d-flex justify-content-between">
+                            <span>NO. ORDER:</span>
+                            <strong t-esc="order.name"/>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>LOKASI/MEJA:</span>
+                            <strong class="fs-6" t-esc="tableName"/>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>PELANGGAN:</span>
+                            <strong t-esc="customerName"/>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>JUMLAH TAMU:</span>
+                            <span t-esc="guestCount + ' Orang'"/>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>KASIR/WAITER:</span>
+                            <span t-esc="cashierName"/>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <span>JAM ORDER:</span>
+                            <strong t-esc="timeStr"/>
+                        </div>
+                    </div>
+
+                    <div class="border-top border-dark border-dashed my-2" style="border-top-style: dashed !important;"></div>
+
+                    <div class="d-flex justify-content-between fw-bold mb-1">
+                        <span style="width: 15%;">QTY</span>
+                        <span style="width: 85%;">MENU / INSTRUKSI DAPUR</span>
+                    </div>
+                    <div class="border-top border-dark border-1 mb-2"></div>
+
+                    <div class="item-list">
+                        <t t-foreach="orderLines" t-as="item" t-key="item.id">
+                            <div class="mb-2 pb-1 border-bottom border-light">
+                                <div class="d-flex align-items-start">
+                                    <span class="fw-bold" style="width: 15%;" t-esc="item.qty + 'x'"/>
+                                    <strong style="width: 85%;" t-esc="item.name"/>
+                                </div>
+                                
+                                <div t-if="item.note" class="ms-3 mt-1 p-1 bg-light border border-dark rounded-1" style="font-size: 13px;">
+                                    <i class="fa fa-pencil me-1"></i>
+                                    <strong>NOTE: </strong><span class="fst-italic" t-esc="item.note"/>
+                                </div>
+                            </div>
+                        </t>
+                    </div>
+
+                    <div class="border-top border-dark border-dashed my-2" style="border-top-style: dashed !important;"></div>
+                    <div class="d-flex justify-content-between fw-bold">
+                        <span>TOTAL PORSI:</span>
+                        <span t-esc="totalItems + ' Porsi'"/>
+                    </div>
+                    <div class="border-top border-dark border-2 my-2"></div>
+
+                    <div class="text-center small text-muted">
+                        <div>--- SEGERA DISIAPKAN OLEH DAPUR ---</div>
+                    </div>
+                </div>
+            </main>
+
+            <footer class="modal-footer bg-light border-top px-3 py-2 d-flex justify-content-between">
+                <button class="btn btn-outline-dark btn-sm px-3" t-on-click="cancel">
+                    <t t-esc="props.closePopup"/>
+                </button>
+                <button class="btn btn-dark btn-sm px-4 fw-bold" t-on-click="onPrint">
+                    <t t-esc="props.confirmText"/>
+                </button>
+            </footer>
+        </div>
+    </t>
+
+</templates>

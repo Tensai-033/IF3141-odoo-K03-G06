@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-name="pos_restaurant_custom_addons.ClosePosPopup" t-inherit="point_of_sale.ClosePosPopup" t-inherit-mode="extension">
+        
+        <xpath expr="//div[hasclass('total-orders')]" position="after">
+            <div class="d-flex align-items-center ms-auto gap-2">
+                <div class="border rounded px-3 py-1 bg-light text-dark small fw-semibold">
+                    <i class="fa fa-money text-secondary me-1"></i>
+                    <span>Kas Kecil: </span>
+                    <strong class="text-dark" t-esc="pettyCashTotalFormatted"/>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-dark fw-semibold" t-on-click="openDailyReport" title="Buka Laporan Harian Cabang">
+                    <i class="fa fa-file-text-o me-1"></i> Laporan Harian
+                </button>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[hasclass('notes-container')]" position="before">
+            <div class="bank-transfer-attachment-container border rounded p-3 mb-3 bg-light">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <label class="form-label fw-bold text-dark m-0">
+                        <i class="fa fa-university me-1 text-secondary"></i> Bukti Transfer Bank
+                    </label>
+                    <span t-if="state.bankTransferFileName" class="badge bg-secondary">
+                        <i class="fa fa-check me-1"></i> File Terlampir
+                    </span>
+                </div>
+                <div class="d-flex align-items-center gap-2">
+                    <label class="btn btn-outline-secondary btn-sm d-inline-flex align-items-center cursor-pointer m-0">
+                        <i class="fa fa-upload me-2"></i> Tambahkan Bukti Transfer Bank
+                        <input type="file" 
+                               class="d-none" 
+                               accept="image/*,application/pdf"
+                               t-on-change="onBankTransferFileChange"/>
+                    </label>
+                    <div t-if="state.bankTransferFileName" class="d-flex align-items-center bg-white border rounded px-2 py-1 small">
+                        <i class="fa fa-file-text-o text-muted me-2"></i>
+                        <span class="fw-semibold text-truncate" style="max-width: 250px;" t-esc="state.bankTransferFileName"/>
+                        <button type="button" class="btn btn-sm btn-link text-danger ms-2 p-0" t-on-click="removeBankTransferFile" title="Hapus File">
+                            <i class="fa fa-times"></i>
+                        </button>
+                    </div>
+                    <small t-else="" class="text-muted" style="font-size: 11px;">
+                        Pilih file bukti transfer, foto struk EDC, atau dokumen PDF penyetoran bank.
+                    </small>
+                </div>
+            </div>
+        </xpath>
+
+        <xpath expr="//button[contains(@t-on-click, 'downloadSalesReport')]" position="replace"/>
+    </t>
+
+</templates>
